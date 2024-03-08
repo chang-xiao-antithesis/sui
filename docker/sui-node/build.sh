@@ -33,9 +33,10 @@ echo
 export DOCKER_BUILDKIT=1
 export SOURCE_DATE_EPOCH=1
 
-docker build -f "$DOCKERFILE" "$REPO_ROOT" \
+podman build -f "$DOCKERFILE" "$REPO_ROOT" \
+	-t sui-node:"$GIT_REVISION"\
 	--build-arg GIT_REVISION="$GIT_REVISION" \
 	--build-arg BUILD_DATE="$BUILD_DATE" \
 	--build-arg PROFILE="$PROFILE" \
-  --output type=oci,rewrite-timestamp=true,force-compression=true,tar=false,dest=$OCI_OUTPUT/sui-node,name=sui-node \
+#   --output type=oci,rewrite-timestamp=true,force-compression=true,tar=false,dest=$OCI_OUTPUT/sui-node,name=sui-node \
 	"$@"
